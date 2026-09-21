@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning 101</title>
+    <style>
+        /* =========================
+           GENERAL STYLES
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: #222;
+            background: #f5f7fb;
+        }
+        a {
+            text-decoration: none;
+        }
+        /* =========================
+           NAVIGATION
+        ========================= */
+        header {
+            background: #0b1020;
+            padding: 20px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav h1 {
+            color: white;
+            font-size: 28px;
+        }
+        nav h1 span {
+            color: #4f8cff;
+        }
+        nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        nav ul li a {
+            color: white;
+        }
+        nav ul li a:hover {
+            color: #4f8cff;
+        }
+        /* =========================
+           HERO SECTION
+        ========================= */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(
+                135deg,
+                #0b1020,
+                #182848
+            );
+            color: white;
+            padding: 60px 20px;
+        }
+        .hero-content {
+            max-width: 800px;
+        }
+        .subtitle {
+            color: #4f8cff;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+        .hero h2 {
+            font-size: 60px;
+            margin-bottom: 25px;
+        }
+        .hero h2 span {
+            color: #4f8cff;
+        }
+        .hero p {
+            font-size: 19px;
+            color: #d8dce8;
+            margin-bottom: 35px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 13px 28px;
+            background: #4f8cff;
+            color: white;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #3678ee;
+        }
+        /* =========================
+           GENERAL SECTIONS
+        ========================= */
+        .section {
+            padding: 80px 8%;
+            text-align: center;
+        }
+        .section h2 {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+        .section > p {
+            max-width: 750px;
+            margin: 0 auto 50px;
+            color: #555;
+        }
+        /* =========================
+           MACHINE LEARNING PROCESS
+        ========================= */
+        .ml-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .flow-card {
+            background: white;
+            padding: 30px;
+            width: 250px;
+            border-radius: 10px;
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        .flow-card h3 {
+            color: #4f8cff;
+            font-size: 30px;
+        }
+        .flow-card h4 {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+        .flow-card p {
+            color: #666;
+}
+        .arrow {
+            font-size: 30px;
+            color: #4f8cff;
+        }
+        /* =========================
+           TYPES OF MACHINE LEARNING
+        ========================= */
+        .dark-section {
+            background: #0b1020;
+            color: white;
+        }
+        .dark-section > p {
+            color: #bbb;
+        }
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: #151c31;
+            width: 300px;
+            padding: 35px 25px;
+            border-radius: 10px;
+            border: 1px solid #27304a;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            transition: 0.3s;
+        }
+        .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        .card p {
+            color: #bbb;
+        }
+        .card .example {
+            margin-top: 15px;
+            color: #4f8cff;
+            font-size: 14px;
+        }
+        /* =========================
+           APPLICATIONS
+        ========================= */
+        .applications {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+            gap: 20px;
+        }
+        .application {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.07);
+        }
+        .application span {
+            font-size: 40px;
+        }
+        .application h3 {
+            margin: 15px 0 10px;
+        }
+        .application p {
+            color: #666;
+        }
+        /* =========================
+           FOOTER
+        ========================= */
+        footer {
+            background: #0b1020;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        footer h3 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+        footer span {
+            color: #4f8cff;
+        }
+        footer p {
+            color: #aaa;
+        }
+        .copyright {
+            margin-top: 20px;
+            font-size: 13px;
+        }
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================= */
+        @media (max-width: 900px) {
+            .applications {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .ml-flow {
+                flex-direction: column;
+            }
+            .arrow {
+                transform: rotate(90deg);
+            }
+        }
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            nav ul {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .hero h2 {
+                font-size: 40px;
+            }
+            .section h2 {
+                font-size: 30px;
+            }
+            .applications {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+    <header>
+        <nav>
+            <h1>
+                ML<span>101</span>
+            </h1>
+            <ul>
+                <li>
+                    <a href="#home">Home</a>
+                </li>
+                <li>
+                    <a href="#about">What is ML?</a>
+                </li>
+                <li>
+                    <a href="#types">Types</a>
+                </li>
+                <li>
+                    <a href="#applications">Applications</a>
+</li>
+            </ul>
+        </nav>
+    </header>
+    <!-- =========================
+         HERO
+    ========================== -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="subtitle">
+                WELCOME TO
+            </p>
+            <h2>
+                Machine Learning
+                <span>101</span>
+            </h2>
+            <p>
+                Discover how computers learn from data,
+                identify patterns, and make predictions
+                without being explicitly programmed for
+                every task.
+            </p>
+            <a href="#about" class="btn">
+                Start Learning
+            </a>
+        </div>
+    </section>
+    <!-- =========================
+         WHAT IS MACHINE LEARNING
+    ========================== -->
+    <section id="about" class="section">
+        <h2>
+            What is Machine Learning?
+        </h2>
+        <p>
+            Machine Learning is a branch of Artificial
+            Intelligence that allows computers to learn
+            from data and improve their performance
+            without being explicitly programmed for
+            every decision.
+        </p>
+        <div class="ml-flow">
+            <div class="flow-card">
+                <h3>01</h3>
+                <h4>
+                    Collect Data
+                </h4>
+                <p>
+                    Machines need data to learn
+                    patterns and relationships.
+                </p>
+            </div>
+            <div class="arrow">
+                →
+            </div>
+            <div class="flow-card">
+                <h3>02</h3>
+                <h4>
+                    Train Model
+                </h4>
+                <p>
+                    The model studies the data
+                    and learns useful patterns.
+                </p>
+            </div>
+            <div class="arrow">
+                →
+            </div>
+            <div class="flow-card">
+                <h3>03</h3>
+                <h4>
+                    Make Predictions
+                </h4>
+                <p>
+                    The trained model uses what
+                    it learned to make predictions.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- =========================
+         TYPES OF ML
+    ========================== -->
+    <section id="types" class="section dark-section">
+        <h2>
+            Types of Machine Learning
+        </h2>
+        <p>
+            Machine Learning can be divided into
+            different approaches depending on how
+            the machine learns.
+        </p>
+        <div class="cards">
+            <!-- Supervised -->
+            <div class="card">
+                <div class="icon">
+                    🎯
+                </div>
+                <h3>
+                    Supervised Learning
+                </h3>
+                <p>
+                    The model learns from data that
+                    already has known answers.
+                </p>
+                <p class="example">
+                    Example: Predicting house prices.
+                </p>
+            </div>
+            <!-- Unsupervised -->
+            <div class="card">
+                <div class="icon">
+                    🔍
+                </div>
+                <h3>
+                    Unsupervised Learning
+                </h3>
+                <p>
+                    The model finds patterns and
+                    groups in data without predefined
+                    answers.
+                </p>
+                <p class="example">
+                    Example: Customer segmentation.
+                </p>
+            </div>
+            <!-- Reinforcement -->
+            <div class="card">
+<div class="icon">
+                    🎮
+                </div>
+                <h3>
+                    Reinforcement Learning
+                </h3>
+                <p>
+                    An agent learns by interacting
+                    with an environment and receiving
+                    rewards or penalties.
+                </p>
+                <p class="example">
+                    Example: Game-playing AI.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- =========================
+         APPLICATIONS
+    ========================== -->
+    <section id="applications" class="section">
+        <h2>
+            Machine Learning in the Real World
+        </h2>
+        <p>
+            Machine Learning is already being used
+            in many technologies and industries.
+        </p>
+        <div class="applications">
+            <div class="application">
+                <span>
+                    🤖
+                </span>
+                <h3>
+                    Recommendation Systems
+                </h3>
+                <p>
+                    Netflix, YouTube and Spotify use
+                    ML to recommend content.
+                </p>
+            </div>
+            <div class="application">
+                <span>
+                    💳
+                </span>
+                <h3>
+                    Fraud Detection
+                </h3>
+                <p>
+                    Banks use ML to detect unusual
+                    transactions and potential fraud.
+                </p>
+            </div>
+            <div class="application">
+                <span>
+                    👁️
+                </span>
+                <h3>
+                    Computer Vision
+                </h3>
+                <p>
+                    ML can help computers understand
+                    images and videos.
+                </p>
+            </div>
+            <div class="application">
+                <span>
+                    🚗
+                </span>
+                <h3>
+                    Self-Driving Cars
+                </h3>
+                <p>
+                    ML helps vehicles understand their
+                    surroundings and make decisions.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer>
+        <h3>
+            ML<span>101</span>
+        </h3>
+        <p>
+            Learning Machine Learning,
+            one concept at a time.
+        </p>
+        <p class="copyright">
+            © 2026 ML 101. Built with HTML & CSS.
+        </p>
+    </footer>
+</body>
+</html>
